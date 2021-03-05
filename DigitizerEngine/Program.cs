@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Drawing;
 
 namespace DigitizerEngine
 {
@@ -32,22 +33,18 @@ namespace DigitizerEngine
                 return (int)ExitCodes.FileException;
             }
 
+            //Process CLI
+            Console.WriteLine("Parsing arguments...");
+            var work = new ImageDigitizer();
+            work.RequiredNeighbours = (int)(ParseNumericArgument("-n", args) ?? work.RequiredNeighbours);
+            work.MaxBackgroundDistance = (int)(ParseNumericArgument("-c", args) ?? work.MaxBackgroundDistance);
+            double? c = ParseNumericArgument("-b", args);
+            if (c != null) work.BackgroundEdge = Color.FromArgb((int)c);
+            c = ParseNumericArgument("-s", args);
+            if (c != null) CsvExporter.ScalingFactor = (double)c;
+
             //Digitize
             Console.WriteLine("Digitizing...");
-            var work = new ImageDigitizer();
-            try
-            {
-                if (args.Any(x => x.Split(':').FirstOrDefault() == "-n"))
-                {
-                    work.RequiredNeighbours = int.Parse(args.First(x => x.Split(':').First() == "-n").Split(':').Last());
-                    Console.WriteLine("Set required neighbours number to " + work.RequiredNeighbours.ToString());
-                }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Invalid command line parameters!");
-                return (int)ExitCodes.CLIError;
-            }
             try
             {
                 work.Digitize(args[0]);
@@ -91,6 +88,26 @@ namespace DigitizerEngine
                 Path.Combine(dir, name + "_digitized.png"),
                 Path.Combine(dir, name + "_source.png")
             };
+        }
+
+        static double? ParseNumericArgument(string name, string[] args)
+        {
+            try
+            {
+                if (FindArgument(name, args))
+                {
+                    return double.Parse(args.First(x => x.Split(':').First() == name).Split(':').Last());
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid command line parameter: " + name);
+            }
+            return null;
+        }
+        static bool FindArgument(string name, string[] args)
+        {
+            return args.Any(x => x.Split(':').FirstOrDefault() == name);
         }
     }
 }

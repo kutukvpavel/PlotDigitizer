@@ -8,6 +8,7 @@ namespace DigitizerEngine
     public static class CsvExporter
     {
         public static CsvConfiguration Configuration { get; set; } = new CsvConfiguration(CultureInfo.CurrentCulture);
+        public static double ScalingFactor { get; set; } = 1;
 
         public static void Export(int?[] data, string path)
         {
@@ -17,8 +18,8 @@ namespace DigitizerEngine
                 for (int i = 0; i < data.Length; i++)
                 {
                     if (data[i] == null) continue;
-                    writer.WriteField(i);
-                    writer.WriteField(data[i]);
+                    writer.WriteField(i * ScalingFactor);
+                    writer.WriteField(data[i] * ScalingFactor);
                     writer.NextRecord();
                 }
                 writer.Flush();
