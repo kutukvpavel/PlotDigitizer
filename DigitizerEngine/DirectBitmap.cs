@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DigitizerEngine
 {
+    /* Taken from:
+     * https://stackoverflow.com/questions/24701703/c-sharp-faster-alternatives-to-setpixel-and-getpixel-for-bitmaps-for-windows-f
+     */
+
     public class DirectBitmap : IDisposable
     {
         public Bitmap Bitmap { get; private set; }
