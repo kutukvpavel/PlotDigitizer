@@ -9,7 +9,7 @@ TODO: implement -b and -c command line switches. Create a GUI for easy parameter
 
 # Usage
 
-DigitizerEngine.exe "Path to preprocessed image" [-d -n:# -b:# -c:# -k]
+DigitizerEngine.exe "Path to preprocessed image" [-d -n:# -b:# -c:# -k -s:#]
 
 -d = Use semicolon as CSV delimeter. Useful for certain UI cultures.
 
@@ -20,6 +20,8 @@ DigitizerEngine.exe "Path to preprocessed image" [-d -n:# -b:# -c:# -k]
 -c:# = Minimum euclidian color distance between specified background color and a pixel for the former to be counted as a plot point.
 
 -k = Keep console window open after processing.
+
+-s:# = Scaling factor for CSV output. Default is 1, you can compute this factor based on scanner resolution and original plot's properties.
 
 # Examples
 
