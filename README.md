@@ -15,7 +15,7 @@ DigitizerEngine.exe "Path to preprocessed image" [-d -n:# -b:# -c:# -k]
 
 -n:# = Require at least # nearest pixels to differ from the background for a pixel to be counted as a plot point. Default is 2. Minimum value is 1, maximum value is, obviously, 8.
 
--b:# = Background color # as ARGB integer. Default is white (-1).
+-b:# = Background color # as ARGB integer (https://argb-int-calculator.netlify.app/). Default is white (-1).
 
 -c:# = Minimum euclidian color distance between specified background color and a pixel for the former to be counted as a plot point.
 
