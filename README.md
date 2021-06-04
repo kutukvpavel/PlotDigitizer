@@ -5,7 +5,7 @@ Small tool designed to help with digitizing scanned plots. It expects image file
 Scanned images have to be processed in advance so that color distance between traces (points) and the background is sufficient. Scanning resolution has to be high enough for a point to comrise at least 4-8 pixels (and to prevent significant color bleeding).
 The background is assumed to be a (more-or-less) solid color (target background color is configurable). Alpha channel support wasn't tested.
 
-TODO: implement -b and -c command line switches. Create a GUI for easy parameter adjustment.
+TODO: Create a GUI for easy parameter adjustment.
 
 # Usage
 
